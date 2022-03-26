@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+
+    <title>Todo App</title>
+
+    <!--import css-->
+    <link rel="stylesheet" href="style.css">
+
+    <!--import vue -->
+    <script src="https://unpkg.com/vue@3"></script>
+</head>
+<body>
+    <div id="app">
+        <h1>{{title}}</h1>
+        <form v-on:submit.prevent="addTask">
+            <input type="text" v-model="newTask">
+            <button>Add</button>
+        </form>
+        <ul>
+            <li v-for="task in filteredTasks" v-bind:key="task.id">
+                <p><input type="checkbox" v-model="task.completed">
+                <span v-bind:class="{completed: task.completed}">{{task.text}}</span></p>
+                <button v-on:click="removeTask(task)">X</button>
+            </li>
+        </ul>
+        <button v-on:click="hideCompleted = !hideCompleted">
+            {{hideCompleted ? 'Show All' : "Hide Completed"}}
+        </button>
+    </div>
+    
+    <!-- import app -->
+    <script src="./script.js"></script>
+
+    <!-- mount app -->
+    <script>
+        const mountedApp = app.mount('#app')
+    </script>
+</body>
+</html>
